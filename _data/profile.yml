@@ -30,7 +30,7 @@ short_bio: >-
     I am currently a Ph.D candidate in the <b>Department of Biomedical Systems Informatics</b> at <b>Yonsei University College of Medicine</b>, supervised by <a href="https://scholar.google.com/citations?user=DNs7sk4AAAAJ&hl=ko&oi=ao" target="_blank">Prof. Yu Rang Park</a>.
     I also working as an AI Researcher at the Digital Healthcare Laboratory <a href="https://www.dhlab.org/" target="_blank">(DHLab)</a> in <b>Yonsei University College of Medicine</b> and <a href="https://yuhs.severance.healthcare/sev-en/index.do" target="_blank">Severance Hospital</a> in Seoul, Republic of Korea.
     Previously, I finished my B.B.A in <a href="https://biz.kookmin.ac.kr" target="_blank">Big Data Management and Statistics</a> at <b>Kookmin University</b> in Seoul, Republic of Korea.
-    From July 2021 to September 2021, I worked as a Data Scientist at <a href="https://dacon.io/" target="_blank">DACON</a>, which is the largest data science competition platform in Korea.
+    From July to September in 2021, I worked as a Data Scientist at <a href="https://dacon.io/" target="_blank">DACON</a>, which is the largest data science competition platform in Korea.
   </p>
 
 portrait_url: /assets/images/photos/profile_v1_251011.jpeg
@@ -58,13 +58,15 @@ education:
 
 projects:
 - name: <a href="https://littlehearts.io/" target="_blank">Children mind voyager</a><br>funded by - <a href="hi.co.kr" target="_blank">Hyundai Insurance</a>
-  date: 2025-present
-- name: <a href="https://kmelloddy.org/english" target="_blank">K-MELLODDY</a><br>funded by -  <a href="https://www.msit.go.kr/" target="_blank">MIST</a> and <a href="https://www.mohw.go.kr/" target="_blank">MOHW</a>
-  date: 2024-present
+  date: "2025-present"
+- name: <a href="https://kmelloddy.org/english" target="_blank">K-MELLODDY</a><br>funded by -  <a href="https://www.msit.go.kr/" target="_blank">MSIT</a> and <a href="https://www.mohw.go.kr/" target="_blank">MOHW</a>
+  date: "2024-present"
 - name: <a href="https://www.bigdata-cancer.kr/ncc/lverInnoServiceInfo.do" target="_blank">FL-based Cancer Prognosis Prediction</a><br>funded by -  <a href="https://www.motie.go.kr/" target="_blank">MOTIE</a>
-  date: 2023-2024
-- name: <a href="https://www.aihub.or.kr/aihubdata/data/view.do?pageIndex=1&currMenu=115&topMenu=100&srchOptnCnd=OPTNCND001&searchKeyword=%EC%95%84%EB%8F%99&srchDetailCnd=DETAILCND001&srchOrder=ORDER001&srchPagePer=20&srchDataRealmCode=REALM006&srchDataRealmCode=REALM006&aihubDataSe=data&dataSetSn=71355" target="_blank">Child and Adolescent Fundus Data Collection</a><br>funded by -  <a href="https://www.msit.go.kr/" target="_blank">MIST</a>
-  date: 2022-2022
+  date: "2023-2024"
+- name: <a href="https://www.aihub.or.kr/aihubdata/data/view.do?pageIndex=1&currMenu=115&topMenu=100&srchOptnCnd=OPTNCND001&searchKeyword=%EC%95%84%EB%8F%99&srchDetailCnd=DETAILCND001&srchOrder=ORDER001&srchPagePer=20&srchDataRealmCode=REALM006&srchDataRealmCode=REALM006&aihubDataSe=data&dataSetSn=71516" target="_blank">Artificial Intelligence Learning Data Construction Project</a><br>Adolescent and Children Retina Data<br>funded by -  <a href="https://www.msit.go.kr/" target="_blank">MSIT</a>
+  date: "2022-2022"
+- name: <a href="https://www.aihub.or.kr/aihubdata/data/view.do?pageIndex=1&currMenu=115&topMenu=100&srchOptnCnd=OPTNCND001&searchKeyword=%ED%96%89%EB%8F%99&srchDetailCnd=DETAILCND001&srchOrder=ORDER001&srchPagePer=20&srchDataRealmCode=REALM006&srchDataRealmCode=REALM006&aihubDataSe=data&dataSetSn=631" target="_blank">Artificial Intelligence Learning Data Construction Project</a><br>Infant Behavior Video Data<br>funded by -  <a href="https://www.msit.go.kr/" target="_blank">MSIT</a>
+  date: "2022-2022"
 
 
 

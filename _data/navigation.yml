@@ -5,3 +5,7 @@ pages:
   url: /
 - name: Publications
   url: /publications
+- name: Research Projects
+  url: /research_projects
+# - name: Showcase
+#   url: /showcase
