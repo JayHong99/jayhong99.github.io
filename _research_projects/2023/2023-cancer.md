@@ -1,6 +1,6 @@
 ---
 title:          "Development and Implementation of a Distributed Network–Based Federated Learning Support System for Healthcare Data<br>(KR)분산 네트워크 기반 의료 특화 데이터 연합학습을 활용한 지원시스템 개발 및 실증"
-date:           2023-01-01 00:00:00 +0800
+date:           2023-01-02 00:00:00 +0800
 selected:       false
 pub:            "Ministry of Trade, Industry and Resources (MOTIE)"
 pub_last: '<span class="badge badge-pill badge-publication badge-success">Medical Dataset</span><span class="badge badge-pill badge-publication badge-success">Federated Learning</span>'
