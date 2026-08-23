@@ -1,5 +1,5 @@
 ---
-title:          "Artificial Intelligence Learning Data Construction Project<br>- Adolescent and Children Retina Data<br>(KR) 소아청소년 정신질환 진단 안저 이미지 데이터"
+title:          "Adolescent and Children Retina Data<br>Artificial Intelligence Learning Data Construction Project<br>(KR) 소아청소년 정신질환 진단 안저 이미지 데이터"
 date:           2022-06-01 00:00:00 +0800
 selected:       false
 pub:            "Ministry of Science, ICT and Future Planning(MSIT)"

@@ -1,7 +1,7 @@
 ---
 title:          "Development of deep ensembles for screening and severity of autism using retinal photographs"
 date:           2023-12-15 09:00:00 +0900
-selected:       false
+selected:       true
 pub:            "JAMA Network Open."
 pub_date:       "2023"
 pub_last: '<span class="badge badge-pill badge-publication badge-success">Medical Dataset</span> <span class="badge badge-pill badge-publication badge-success">Deep Ensemble</span>'

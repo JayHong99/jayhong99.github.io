@@ -53,12 +53,34 @@
                     <div class="col-md-6">
                         <div class="mx-2 my-1">
                             <h6>Research Projects</h6>
-                            <ul class="list small pl-3 mb-1">
+                            <ul class="project-list list-unstyled small mb-1">
                                 {% for item in site.data.profile.projects %}
-                                <li>
-                                    <div class="d-flex">
-                                        <div>{{ item.name }}</div>
-                                        <div class="ml-auto mt-auto no-break"><em>{{ item.date }}</em></div>
+                                <li class="project-list-item">
+                                    <div class="project-summary">
+                                        {% if item.tags %}
+                                        <div class="project-tags">
+                                            {% for tag in item.tags %}
+                                            <span class="project-tag">{{ tag }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                        <div class="project-main">
+                                            <div class="project-heading">
+                                                <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+                                            </div>
+                                            {% if item.description %}
+                                            <div>{{ item.description }}</div>
+                                            {% endif %}
+                                            <div class="project-funder">
+                                                funded by -
+                                                {% if item.funder_url %}
+                                                <a href="{{ item.funder_url }}" target="_blank">{{ item.funder }}</a>
+                                                {% else %}
+                                                {{ item.funder }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="project-date no-break"><em>{{ item.date }}</em></div>
                                     </div>
                                 </li>
                                 {% endfor %}

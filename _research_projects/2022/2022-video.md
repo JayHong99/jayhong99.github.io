@@ -1,5 +1,5 @@
 ---
-title:          "Artificial Intelligence Learning Data Construction Project<br>Construction of Infant Behavior Video Data<br>(KR) 영유아 행동 영상 데이터"
+title:          "Infant Behavior Video Data<br>Artificial Intelligence Learning Data Construction Project<br>(KR) 영유아 행동 영상 데이터"
 date:           2022-04-01 00:00:00 +0800
 selected:       false
 pub:            "Ministry of Science, ICT and Future Planning(MSIT)"
