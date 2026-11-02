@@ -1,0 +1,332 @@
+# Research timeline (rendered by /timeline).
+#
+# lanes[].columns[]: named columns in the Gantt view (width = relative width, span = sub-columns).
+# project.lane / project.column / project.sub: where the box sits (sub defaults to 0).
+# start / end: "YYYY-MM" (end omitted = ongoing).   status: done | ongoing
+# builds_on: id of the project this one directly continues (gray dashed link).
+# phd: true marks projects inside the Ph.D. research bracket (see `phd` below).
+# output.type: paper | patent | data     output.role: lead (1st / co-1st) | co
+# output.state: published | review | prep (in prep, preprint, ongoing); state_label overrides the status text
+# output.date: "YYYY-MM" (omitted = placed at "now"); output.short: label used in the Gantt view
+
+axis:
+  start: "2022-04"
+  end: "2026-12"
+  now: "2026-11"
+
+lanes:
+  - key: clinical
+    label: "Clinical AI"
+    columns:
+      - {key: asd, label: "Autism Spectrum Disorder", span: 2}
+      - {key: mmd, label: "Moyamoya Disease"}
+      - {key: tsc, label: "Tuberous Sclerosis Complex", width: 0.9}
+      - {key: sepsis, label: "Sepsis", width: 0.8}
+      - {key: crc, label: "Colorectal Cancer", width: 0.9}
+  - key: cl
+    label: "Continual Learning"
+    columns:
+      - {key: cl, label: "Hierarchical CL", width: 0.9}
+  - key: mm
+    label: "Multimodal"
+    columns:
+      - {key: relate, label: "Encoder merging", width: 0.75}
+      - {key: etfuml, label: "Missing modality"}
+  - key: fl
+    label: "Federated Learning"
+    columns:
+      - {key: het, label: "FL + Data Heterogeneity"}
+      - {key: noise, label: "FL + Label Noise", width: 1.1}
+      - {key: km, label: "K-MELLODDY", width: 0.95}
+  - key: llm
+    label: "LLM"
+    columns:
+      - {key: he, label: "FL + Homomorphic Encryption", width: 0.92}
+      - {key: qpeft, label: "Quantum PEFT", width: 0.75}
+
+phd:
+  label: "Ph.D. research"
+  start: "2025-01"
+  members: [etfuml, fedstar, fedformula]
+  thesis: "Robust Multimodal Federated Learning under Missing Modality and Label Noise in Healthcare Data"
+  defense: "Feb 2027"
+
+threads:
+  - key: silo
+    label: "Data silo"
+    color: "#5F5E5A"
+    desc: "Patient data cannot leave each institution — the starting point for federated learning."
+    edges:
+      - [nia, motie]
+  - key: miss
+    label: "Missing modality"
+    color: "#D85A30"
+    desc: "Modalities are missing and asynchronous per patient and per site — addressed by ETF-UML."
+    edges:
+      - [motie, etfuml]
+  - key: het
+    label: "Institutional heterogeneity"
+    color: "#378ADD"
+    desc: "Patient mix, data and diagnostic practice differ across institutions and countries — addressed by FedSTAR."
+    edges:
+      - [nia, fedstar]
+      - [motie, fedstar]
+      - [vietnam, fedstar]
+  - key: label
+    label: "Label unreliability"
+    color: "#BA7517"
+    desc: "Labels come from human judgment and vary across raters, sites and countries — addressed by FedFORMULA."
+    edges:
+      - [nia, fedformula]
+      - [vietnam, fedformula]
+
+projects:
+  # ---------------- Clinical AI ----------------
+  - id: nia
+    year: 2022
+    period: "2022"
+    start: "2022-06"
+    end: "2022-12"
+    lane: clinical
+    column: asd
+    sub: 1
+    status: done
+    title: "Pediatric retina dataset"
+    tag: "NIA · project manager"
+    url: "https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71516"
+    motivation: "Objective, non-invasive biomarker for pediatric psychiatric disorders."
+    partners: "Severance, Samsung Medical Center, Eunpyeong St. Mary's — child psychiatry and ophthalmology"
+    outputs:
+      - {type: data, role: lead, state: published, date: "2022-12", short: "AI Hub", name: "Multicenter retina dataset", venue: "AI Hub", url: "https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71516"}
+      - {type: paper, role: lead, state: published, date: "2023-12", short: "JAMA NO '23", name: "ASD screening", venue: "JAMA Netw Open 2023 · co-1st", url: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2812964"}
+      - {type: paper, role: lead, state: published, date: "2025-03", short: "npj DM '25", name: "ADHD biomarker", venue: "npj Digit Med 2025 · co-1st", url: "https://www.nature.com/articles/s41746-025-01547-9"}
+
+  - id: video
+    year: 2022
+    period: "2022"
+    start: "2022-04"
+    end: "2022-12"
+    lane: clinical
+    column: asd
+    status: done
+    title: "Behavior video analysis"
+    tag: "research assistant"
+    motivation: "Data QC and baseline models for video-based joint attention and toddler motor assessment."
+    outputs:
+      - {type: paper, role: co, state: published, date: "2023-05", short: "JAMA NO '23", name: "Joint attention ASD", venue: "JAMA Netw Open 2023", url: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2805303"}
+      - {type: paper, role: co, state: published, date: "2024-02", short: "JMIR FR '24", name: "Toddler gross motor GCN", venue: "JMIR Form Res 2024", url: "https://formative.jmir.org/2024/1/e51996"}
+
+  - id: sepsis
+    year: 2022
+    period: "2022"
+    start: "2022-04"
+    end: "2022-12"
+    lane: clinical
+    column: sepsis
+    status: done
+    title: "3D cell imaging"
+    tag: "research assistant"
+    motivation: "Data collection for label-free 3D CD8⁺ T cell morphology as a sepsis biomarker."
+    outputs:
+      - {type: paper, role: co, state: published, date: "2023-12", short: "LSA '23", name: "CD8⁺ T cell morphology", venue: "Light Sci Appl 2023", url: "https://www.nature.com/articles/s41377-023-01309-w"}
+
+  - id: mmd
+    year: 2022
+    period: "2022–2023"
+    start: "2022-04"
+    end: "2023-12"
+    lane: clinical
+    column: mmd
+    status: done
+    title: "Moyamoya screening"
+    motivation: "Diagnosis requires invasive angiography — can retinal vessels screen Moyamoya disease?"
+    partners: "Severance Neurosurgery"
+    outputs:
+      - {type: paper, role: lead, state: published, date: "2024-01", short: "Stroke '24", name: "Moyamoya from retina", venue: "Stroke 2024 · co-1st", url: "https://www.ahajournals.org/doi/10.1161/STROKEAHA.123.044026"}
+      - {type: patent, role: lead, state: published, date: "2024-07", short: "Patent", name: "Patent", venue: "KR · US · EP", url: "https://patents.google.com/patent/US20240221945A1/en"}
+
+  - id: vietnam
+    year: 2024
+    period: "2024.07–2026"
+    start: "2024-07"
+    end: "2026-12"
+    lane: clinical
+    column: mmd
+    status: done
+    title: "Vietnam Moyamoya"
+    tag: "builds on Moyamoya"
+    builds_on: mmd
+    motivation: "Prospective, international multicenter transfer learning."
+    partners: "UMP-HCMC — ophthalmology and neurosurgery"
+    note: "Insight only — no separate publication"
+
+  - id: hi
+    year: 2025
+    period: "2025–"
+    start: "2025-09"
+    lane: clinical
+    column: asd
+    sub: 1
+    status: ongoing
+    title: "Children mind voyager"
+    tag: "extends NIA dataset"
+    builds_on: nia
+    url: "https://littlehearts.io/"
+    motivation: "Prospective multimodal ASD screening and severity from retina and behavior video."
+    partners: "Hyundai Marine & Fire Insurance, Severance"
+    outputs:
+      - {type: paper, role: lead, state: prep, short: "Severity", name: "Retina + video severity", venue: "", state_label: "ongoing"}
+
+  - id: crc
+    year: 2025
+    period: "2025–"
+    start: "2025-03"
+    lane: clinical
+    column: crc
+    status: ongoing
+    title: "CRC multimodal"
+    tag: "applies ETF-UML"
+    builds_on: etfuml
+    motivation: "ETF-UML-based multimodal prediction over six clinical modalities."
+    partners: "Severance Medical Oncology"
+    outputs:
+      - {type: paper, role: lead, state: prep, short: "CRC", name: "CRC multimodal", venue: ""}
+
+  - id: tsc
+    year: 2026
+    period: "2026–"
+    start: "2026-03"
+    lane: clinical
+    column: tsc
+    status: ongoing
+    title: "TSC diagnosis"
+    motivation: "3D brain MRI to diagnose TSC and predict phenotype and developmental delay."
+    partners: "Severance Pediatric Neurology"
+    outputs:
+      - {type: paper, role: lead, state: prep, short: "TSC MRI", name: "TSC brain MRI", venue: "", state_label: "ongoing"}
+
+  # ---------------- Continual learning ----------------
+  - id: cl
+    year: 2022
+    period: "2022"
+    start: "2022-04"
+    end: "2022-12"
+    lane: cl
+    column: cl
+    status: done
+    title: "Hi-DER"
+    motivation: "Arthropathy grading across multiple joints, learned incrementally."
+    outputs:
+      - {type: paper, role: co, state: published, date: "2025-03", short: "Radiol Med '25", name: "Hi-DER", venue: "La Radiol Med 2025", url: "https://link.springer.com/article/10.1007/s11547-025-01974-4"}
+
+  # ---------------- Multimodal ----------------
+  - id: etfuml
+    year: 2025
+    period: "2025–2026"
+    start: "2025-01"
+    end: "2026-08"
+    lane: mm
+    column: etfuml
+    status: done
+    phd: true
+    title: "ETF-UML"
+    motivation: "Clinicians: missingness itself is information — compose only the observed modalities on a shared ETF geometry."
+    outputs:
+      - {type: paper, role: lead, state: published, date: "2026-08", short: "Inf Fusion '26", name: "ETF-UML", venue: "Information Fusion 2026 · 1st", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6986763"}
+
+  - id: relate
+    year: 2025
+    period: "2025–"
+    start: "2025-06"
+    lane: mm
+    column: relate
+    status: ongoing
+    title: "ReLATE"
+    motivation: "Merging heterogeneous pretrained unimodal encoders, with anchor-based interpretability."
+    outputs:
+      - {type: paper, role: co, state: review, short: "TPAMI", name: "ReLATE", venue: "TPAMI · 2nd author"}
+
+  # ---------------- Federated learning ----------------
+  - id: motie
+    year: 2023
+    period: "2023–2024"
+    start: "2023-01"
+    end: "2024-12"
+    lane: fl
+    column: het
+    status: done
+    title: "Federated cancer prognosis"
+    tag: "MOTIE"
+    url: "https://www.bigdata-cancer.kr/ncc/lverInnoServiceInfo.do"
+    motivation: "Patient data cannot leave the hospitals — colorectal cancer prognosis with federated learning."
+    partners: "National Cancer Center, Samsung Medical Center, Jeonbuk National Univ. Hospital, Gil Medical Center + Evidnet"
+    outputs:
+      - {type: paper, role: co, state: published, date: "2024-10", short: "iScience '24", name: "PPFL", venue: "iScience 2024", url: "https://www.cell.com/iscience/fulltext/S2589-0042(24)02168-0"}
+      - {type: data, role: lead, state: published, date: "2024-12", short: "CARES CDSS", name: "CARES CDSS", venue: "piloted at 4 hospitals"}
+
+  - id: fedstar
+    year: 2025
+    period: "2025–"
+    start: "2025-01"
+    lane: fl
+    column: het
+    status: ongoing
+    phd: true
+    title: "FedSTAR"
+    motivation: "Institutions differ in label distribution and data — ETF-anchored federated learning under heterogeneity."
+    outputs:
+      - {type: paper, role: lead, state: prep, short: "FedSTAR", name: "FedSTAR", venue: ""}
+
+  - id: kmelloddy
+    year: 2024
+    period: "2024–"
+    start: "2024-08"
+    lane: fl
+    column: km
+    status: ongoing
+    title: "K-MELLODDY"
+    tag: "own proposal, awarded"
+    url: "https://kmelloddy.org/english"
+    motivation: "Pharma federated learning: compound data cannot be pooled across companies."
+    partners: "Evidnet, KETI"
+    note: "Research output: FedFORMULA (FL + label noise)"
+
+  - id: fedformula
+    year: 2025
+    period: "2025–"
+    start: "2025-06"
+    lane: fl
+    column: noise
+    status: ongoing
+    phd: true
+    title: "FedFORMULA"
+    tag: "K-MELLODDY"
+    builds_on: kmelloddy
+    motivation: "Labels are partial and noisy — a chemical foundation model as prior for federated learning under label noise."
+    outputs:
+      - {type: paper, role: lead, state: prep, short: "FedFORMULA", name: "FedFORMULA", venue: "co-1st"}
+
+  # ---------------- LLM ----------------
+  - id: fedhemar
+    year: 2026
+    period: "2026–"
+    start: "2026-01"
+    lane: llm
+    column: he
+    status: ongoing
+    title: "FedHEMAR"
+    motivation: "Homomorphically encrypted LoRA aggregation with personalization for federated LLM fine-tuning."
+    outputs:
+      - {type: paper, role: lead, state: review, short: "ARR", name: "FedHEMAR", venue: "ARR · co-1st"}
+
+  - id: qpeft
+    year: 2026
+    period: "2026–"
+    start: "2026-01"
+    lane: llm
+    column: qpeft
+    status: ongoing
+    title: "Quantum-PEFT"
+    motivation: "Quantum-computing ideas for ultra parameter-efficient LLM fine-tuning."
+    outputs:
+      - {type: paper, role: lead, state: prep, short: "Preprint", name: "Quantum PEFT", venue: "co-1st", state_label: "preprint"}

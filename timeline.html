@@ -1,0 +1,109 @@
+---
+layout: default
+title: Research Timeline
+navbar_title: Timeline
+permalink: /timeline
+container_class: container-lg tl-wide
+---
+{% assign tl = site.data.timeline %}
+{% assign sorted = tl.projects | sort: "start" %}
+{% assign groups = sorted | group_by: "year" %}
+<div class="bg-white shadow-sm rounded-xl p-3 p-md-4 mb-4 tl-card" id="tl-root" data-view="gantt">
+  <div class="d-flex align-items-start">
+    <div>
+      <h4 class="mb-1">Research Timeline</h4>
+      <p class="text-muted mb-3 tl-intro">Each project, why it started, and what it produced. Threads trace how a problem met in one project motivated the next.</p>
+    </div>
+    <div class="btn-group btn-group-sm ml-auto tl-viewtoggle" role="group" aria-label="View">
+      <button type="button" class="btn btn-outline-secondary active" data-view="gantt">Timeline</button>
+      <button type="button" class="btn btn-outline-secondary" data-view="list">List</button>
+    </div>
+  </div>
+
+  <div class="tl-legend">
+    <div class="tl-legend-row">
+      <span class="tl-legend-head">Project</span>
+      {% for l in tl.lanes %}
+      <span class="tl-legend-item"><span class="tl-swatch lane-{{ l.key }}"></span>{{ l.label }}</span>
+      {% endfor %}
+      <span class="tl-legend-sep"></span>
+      <span class="tl-legend-item"><span class="tl-swatch tl-swatch-plain"></span>completed</span>
+      <span class="tl-legend-item"><span class="tl-swatch tl-swatch-plain is-ongoing"></span>ongoing</span>
+      <span class="tl-legend-item tl-only-gantt"><span class="tl-link-sample"></span>builds on</span>
+      <span class="tl-legend-item tl-only-gantt"><span class="tl-phd-sample"></span>Ph.D. research</span>
+    </div>
+    <div class="tl-legend-row">
+      <span class="tl-legend-head">Output</span>
+      <span class="tl-legend-item"><span class="tl-mk mk-paper is-lead lane-fl"></span>paper</span>
+      <span class="tl-legend-item"><span class="tl-mk mk-patent is-lead lane-fl"></span>patent</span>
+      <span class="tl-legend-item"><span class="tl-mk mk-data is-lead lane-fl"></span>data · system · thesis</span>
+      <span class="tl-legend-sep"></span>
+      <span class="tl-legend-item"><span class="tl-mk mk-paper is-lead lane-fl"></span>1st / co-1st</span>
+      <span class="tl-legend-item"><span class="tl-mk mk-paper"></span>co-author</span>
+      <span class="tl-legend-sep"></span>
+      <span class="tl-legend-item"><span class="tl-mk mk-paper"></span>published</span>
+      <span class="tl-legend-item"><span class="tl-mk mk-paper st-review"></span>under review</span>
+      <span class="tl-legend-item"><span class="tl-mk mk-paper st-prep"></span>in prep · preprint · ongoing</span>
+    </div>
+    <div class="tl-legend-row">
+      <span class="tl-legend-head">Thread</span>
+      <button type="button" class="tl-chip is-on" data-thread="all">All</button>
+      {% for t in tl.threads %}
+      <button type="button" class="tl-chip" data-thread="{{ t.key }}" title="{{ t.desc }}"><span class="tl-chip-line" style="background: {{ t.color }};"></span>{{ t.label }}</button>
+      {% endfor %}
+    </div>
+    <p class="tl-thread-desc text-muted small mb-0" id="tl-thread-desc"><span class="tl-only-gantt">Click a project for details. Select a thread, or click a project, to trace where its motivation came from and where it led.</span><span class="tl-only-list">Select a thread or click a project to trace where its motivation came from and where it led.</span></p>
+  </div>
+
+  <!-- Gantt view (desktop) -->
+  <div class="tlg-view">
+    <div class="tlg-head" id="tlg-head"></div>
+    <div class="tlg" id="tlg"></div>
+  </div>
+
+  <!-- List view (mobile, and desktop toggle) -->
+  <div class="tl-listview">
+  <div class="tl" id="tl">
+    <svg class="tl-threads" id="tl-threads" aria-hidden="true"></svg>
+    {% for g in groups %}
+    <section class="tl-year{% cycle '', ' tl-year-alt' %}">
+      <div class="tl-year-label">{{ g.name }}</div>
+      <div class="tl-year-rows">
+        {% for p in g.items %}
+        <div class="tl-row" data-id="{{ p.id }}">
+          <div class="tl-gutter"></div>
+          <div class="tl-box lane-{{ p.lane }}{% if p.status == 'ongoing' %} is-ongoing{% endif %}">
+            <div class="tl-box-head">
+              <span class="tl-title">{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}{% if p.tag %}<span class="tl-tag"> · {{ p.tag }}</span>{% endif %}{% if p.phd %}<span class="tl-tag-phd">Ph.D.</span>{% endif %}</span>
+              <span class="tl-period">{{ p.period }}</span>
+            </div>
+            <div class="tl-motivation">{{ p.motivation }}</div>
+            {% if p.partners %}<div class="tl-partners">{{ p.partners }}</div>{% endif %}
+          </div>
+          <ul class="tl-outputs">
+            {% if p.outputs %}
+            {% for o in p.outputs %}
+            {% if o.state == 'review' %}{% assign st = 'under review' %}{% elsif o.state == 'prep' %}{% assign st = 'in prep' %}{% else %}{% assign st = '' %}{% endif %}
+            {% if o.state_label %}{% assign st = o.state_label %}{% endif %}
+            <li>
+              <span class="tl-mk mk-{{ o.type }}{% if o.role == 'lead' %} is-lead lane-{{ p.lane }}{% endif %}{% if o.state != 'published' %} st-{{ o.state }}{% endif %}"></span>
+              <span class="tl-out-text">{% if o.url %}<a href="{{ o.url }}" target="_blank" rel="noopener">{{ o.name }}</a>{% else %}<span class="tl-out-name">{{ o.name }}</span>{% endif %}{% if o.venue and o.venue != '' %}<span class="tl-venue"> · {{ o.venue }}</span>{% endif %}{% if st != '' %}<span class="tl-state"> · {{ st }}</span>{% endif %}</span>
+            </li>
+            {% endfor %}
+            {% elsif p.note %}
+            <li class="tl-note">{{ p.note }}</li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+  </div>
+</div>
+
+<script>
+  window.TIMELINE = {{ tl | jsonify }};
+</script>
+<script src="{{ '/assets/js/timeline.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
