@@ -460,3 +460,6 @@ a.tlg-out-label:hover { color: #212529; text-decoration: underline; }
 .tlg-out { gap: 0.25rem; }
 .tlg-out .tlg-out-label { padding: 0 2px; border-radius: 3px; font-size: 0.7rem; }
 .tlg-out.is-after .tlg-out-label, .tlg-out.is-wide .tlg-out-label { background: rgba(255,255,255,0.92); }
+.tlg-phd-line { fill: none; stroke: #343a40; stroke-width: 1.5; stroke-dasharray: 5 4; }
+.tlg-box.is-compact .tlg-period { display: none; }
+.tlg-box.is-compact .tlg-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }

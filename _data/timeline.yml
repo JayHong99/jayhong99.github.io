@@ -46,7 +46,6 @@ lanes:
 
 phd:
   label: "Ph.D. research"
-  start: "2025-01"
   members: [etfuml, fedstar, fedformula]
   thesis: "Robust Multimodal Federated Learning under Missing Modality and Label Noise in Healthcare Data"
   defense: "Feb 2027"
@@ -98,14 +97,46 @@ projects:
     partners: "Severance, Samsung Medical Center, Eunpyeong St. Mary's — child psychiatry and ophthalmology"
     outputs:
       - {type: data, role: lead, state: published, date: "2022-12", short: "AI Hub", name: "Multicenter retina dataset", venue: "AI Hub", url: "https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71516"}
+
+  - id: asd
+    year: 2023
+    period: "2023"
+    start: "2023-01"
+    end: "2023-12"
+    lane: clinical
+    column: asd
+    sub: 1
+    status: done
+    title: "ASD screening"
+    tag: "retinal photographs"
+    builds_on: nia
+    motivation: "Can retinal photographs screen autism and its symptom severity?"
+    partners: "Severance child psychiatry and ophthalmology"
+    outputs:
       - {type: paper, role: lead, state: published, date: "2023-12", short: "JAMA NO '23", name: "ASD screening", venue: "JAMA Netw Open 2023 · co-1st", url: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2812964"}
+
+  - id: adhd
+    year: 2024
+    period: "2024.03–2025.03"
+    start: "2024-03"
+    end: "2025-03"
+    lane: clinical
+    column: asd
+    sub: 1
+    status: done
+    title: "ADHD screening"
+    tag: "retinal photographs"
+    builds_on: asd
+    motivation: "Retinal biomarkers for ADHD screening and stratification of visual-attention deficits."
+    partners: "Severance and a second tertiary hospital — child psychiatry"
+    outputs:
       - {type: paper, role: lead, state: published, date: "2025-03", short: "npj DM '25", name: "ADHD biomarker", venue: "npj Digit Med 2025 · co-1st", url: "https://www.nature.com/articles/s41746-025-01547-9"}
 
   - id: video
     year: 2022
-    period: "2022"
+    period: "2022.04–06"
     start: "2022-04"
-    end: "2022-12"
+    end: "2022-06"
     lane: clinical
     column: asd
     status: done
@@ -132,8 +163,8 @@ projects:
 
   - id: mmd
     year: 2022
-    period: "2022–2023"
-    start: "2022-04"
+    period: "2022.10–2023.12"
+    start: "2022-10"
     end: "2023-12"
     lane: clinical
     column: mmd
@@ -170,7 +201,7 @@ projects:
     status: ongoing
     title: "Children mind voyager"
     tag: "extends NIA dataset"
-    builds_on: nia
+    builds_on: adhd
     url: "https://littlehearts.io/"
     motivation: "Prospective multimodal ASD screening and severity from retina and behavior video."
     partners: "Hyundai Marine & Fire Insurance, Severance"
@@ -221,10 +252,10 @@ projects:
 
   # ---------------- Multimodal ----------------
   - id: etfuml
-    year: 2025
-    period: "2025–2026"
-    start: "2025-01"
-    end: "2026-08"
+    year: 2024
+    period: "2024.06–2026.05"
+    start: "2024-06"
+    end: "2026-05"
     lane: mm
     column: etfuml
     status: done

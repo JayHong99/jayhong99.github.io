@@ -172,8 +172,9 @@
         var txt = el('div', 'tlg-box-text', b);
         el('div', 'tlg-title', txt).textContent = p.title;
         el('div', 'tlg-period', txt).textContent = p.period + (p.end && mi(p.end) > A1 ? ' →' : '');
+        if (txt.offsetHeight > bottom - top - 8) b.classList.add('is-compact');
         boxEls[p.id] = b;
-        rects[p.id] = {x: bx, y: top, w: colW, h: bottom - top, textH: txt.offsetHeight, key: colKey(p.lane, p.column, p.sub)};
+        rects[p.id] = {x: bx, y: top, w: colW, h: bottom - top, textH: Math.min(txt.offsetHeight, bottom - top - 8), key: colKey(p.lane, p.column, p.sub)};
       });
 
       // Outputs: marker at publication month (unpublished at "now").
@@ -225,16 +226,22 @@
         outs.forEach(function (q) { placed.push({x: r.x + 5, y: q.y}); });
       });
 
-      // Ph.D. bracket.
+      // Ph.D. bracket: stepped outline that hugs each member column from its own start.
       if (T.phd && T.phd.members) {
-        var bx0 = 1e9, bx1 = -1e9;
-        T.phd.members.forEach(function (id) { var rr = rects[id]; if (rr) { bx0 = Math.min(bx0, rr.x); bx1 = Math.max(bx1, rr.x + rr.w); } });
-        if (bx1 > bx0) {
-          var btop = yTop(T.phd.start) - 3;
-          var br = el('div', 'tlg-phd', G);
-          br.style.left = (bx0 - 5) + 'px'; br.style.width = (bx1 - bx0 + 10) + 'px'; br.style.top = btop + 'px'; br.style.height = (H + 8 - btop) + 'px';
+        var mem = T.phd.members.map(function (id) { return rects[id]; }).filter(Boolean).sort(function (a, b) { return a.x - b.x; });
+        if (mem.length) {
+          var yb = H + 8, dd = '', i2;
+          var x0s = mem.map(function (r) { return r.x - 5; }), x1s = mem.map(function (r) { return r.x + r.w + 5; });
+          var tops = mem.map(function (r) { return r.y - 4; });
+          dd = 'M' + x0s[0] + ' ' + yb + ' V' + tops[0];
+          for (i2 = 0; i2 < mem.length - 1; i2++) {
+            var bnd = (x1s[i2] + x0s[i2 + 1]) / 2;
+            dd += ' H' + bnd + ' V' + tops[i2 + 1];
+          }
+          dd += ' H' + x1s[mem.length - 1] + ' V' + yb;
+          svgEl('path', {d: dd, 'class': 'tlg-phd-line'}, gLinks);
           var tab = el('div', 'tlg-phd-tab', G);
-          tab.style.left = (bx0 - 5) + 'px'; tab.style.width = (bx1 - bx0 + 10) + 'px'; tab.style.top = (H + 8) + 'px';
+          tab.style.left = x0s[0] + 'px'; tab.style.width = (x1s[mem.length - 1] - x0s[0]) + 'px'; tab.style.top = yb + 'px';
           tab.innerHTML = '<span class="tl-mk mk-data is-lead lane-mm st-prep"></span><span><b>' + esc(T.phd.label) + '</b> · thesis defense ' + esc(T.phd.defense) + '</span>';
           tab.title = T.phd.thesis || '';
         }
